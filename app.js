@@ -22,3 +22,29 @@ const bottomRight = document.getElementById("bottomright");
 const strictButton = document.getElementById("strict");
 const onButton = document.getElementById("on");
 const startButton = document.getElementById("start");
+
+// ---- addEventListeners
+strictButton.addEventListener("click", (e) => {
+	strict = strictButton.checked ? true : false;
+});
+
+onButton.addEventListener("click", (e) => {
+	if (on.checked) {
+		on = true;
+		turnCounter.innerHTML = "-";
+	} else {
+		on = false;
+		turnCounter.innerHTML = "";
+		clearColor();
+		clearInterval(intervalID);
+	}
+});
+
+startButton.addEventListener("click", (e) => {
+	if (on || win) {
+		play();
+	}
+});
+
+// ---- functions
+function play() {}
