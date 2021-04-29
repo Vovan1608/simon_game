@@ -6,7 +6,7 @@ let playerOrder = [];
 let flash;
 let tern;
 let good;
-let compTern;
+let compTurn;
 let intervalID;
 let strict = false;
 let noise = true;
@@ -29,7 +29,7 @@ strictButton.addEventListener("click", (e) => {
 });
 
 onButton.addEventListener("click", (e) => {
-	if (on.checked) {
+	if (onButton.checked) {
 		on = true;
 		turnCounter.innerHTML = "-";
 	} else {
@@ -60,5 +60,30 @@ function play() {
 	for (let i = 0; i < 20; i += 1) {
 		order.push(Math.floor(Math.random() * 4) + 1);
 	}
-	console.log(order);
+	
+	compTurn = true;
+
+	intervalID = setInterval(gameTurn, 800);
+}
+
+function gameTurn() {
+	on = false;
+
+	if (flash === turn) {
+		clearInterval(intervalID);
+		compTurn = false;
+		clearColor();
+		on = true;
+	}
+
+	if (compTurn) {
+		clearColor();
+		setTimeout( () => {
+			if (order[flash] === 1) one();
+			if (order[flash] === 2) two();
+			if (order[flash] === 3) three();
+			if (order[flash] === 4) four();
+			flash += 1;
+		}, 200);
+	}
 }
