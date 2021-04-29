@@ -152,6 +152,12 @@ function check() {
 	}
 }
 
+function flashColor() {
+	topLeft.style.backgroundColor = "lightgreen";
+	bottomLeft.style.backgroundColor = "tomato";
+	topRight.style.backgroundColor = "yellow";
+	bottomRight.style.backgroundColor = "lightskyblue";
+}
 // ---- addEventListeners
 strictButton.addEventListener("click", () => {
 	strict = strictButton.checked ? true : false;
