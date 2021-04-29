@@ -12,6 +12,7 @@ let strict = false;
 let noise = true;
 let on = false;
 let win;
+let numsOfGame = 10;
 
 // ---- const
 const turnCounter = document.getElementById("turn");
@@ -33,8 +34,8 @@ function play() {
 	turn = 1;
 	turnCounter.innerHTML = 1;
 	good = true;
-	// 20 - num of games
-	for (let i = 0; i < 20; i += 1) {
+	
+	for (let i = 0; i < numsOfGame; i += 1) {
 		order.push(Math.floor(Math.random() * 4) + 1);
 	}
 	
@@ -116,8 +117,8 @@ function check() {
 	if (playerOrder[playerOrder.length - 1] !== order[playerOrder.length - 1]) {
 		good = false;
 	}
-	// 20 is num of games
-	if (playerOrder.length === 20 && good) {
+	
+	if (playerOrder.length === numsOfGame && good) {
 		winGame();
 	}
 
@@ -158,6 +159,14 @@ function flashColor() {
 	topRight.style.backgroundColor = "yellow";
 	bottomRight.style.backgroundColor = "lightskyblue";
 }
+
+function winGame() {
+	flashColor();
+	turnCounter.innerHTML = "WIN!";
+	on = false;
+	win = true;
+}
+
 // ---- addEventListeners
 strictButton.addEventListener("click", () => {
 	strict = strictButton.checked ? true : false;
