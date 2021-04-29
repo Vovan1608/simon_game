@@ -47,4 +47,18 @@ startButton.addEventListener("click", (e) => {
 });
 
 // ---- functions
-function play() {}
+function play() {
+	win = false;
+	order = [];
+	playerOrder = [];
+	flash = 0;
+	intervalID = 0;
+	turn = 1;
+	turnCounter.innerHTML = 1;
+	good = true;
+	// 20 - num of games
+	for (let i = 0; i < 20; i += 1) {
+		order.push(Math.floor(Math.random() * 4) + 1);
+	}
+	console.log(order);
+}
