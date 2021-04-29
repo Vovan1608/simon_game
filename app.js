@@ -4,7 +4,7 @@
 let order = [];
 let playerOrder = [];
 let flash;
-let tern;
+let turn;
 let good;
 let compTurn;
 let intervalID;
