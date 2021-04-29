@@ -23,29 +23,6 @@ const strictButton = document.getElementById("strict");
 const onButton = document.getElementById("on");
 const startButton = document.getElementById("start");
 
-// ---- addEventListeners
-strictButton.addEventListener("click", (e) => {
-	strict = strictButton.checked ? true : false;
-});
-
-onButton.addEventListener("click", (e) => {
-	if (onButton.checked) {
-		on = true;
-		turnCounter.innerHTML = "-";
-	} else {
-		on = false;
-		turnCounter.innerHTML = "";
-		clearColor();
-		clearInterval(intervalID);
-	}
-});
-
-startButton.addEventListener("click", (e) => {
-	if (on || win) {
-		play();
-	}
-});
-
 // ---- functions
 function play() {
 	win = false;
@@ -105,7 +82,7 @@ function two() {
 	}
 
 	noise = true;
-	rightLeft.style.backgroundColor = "tomato";
+	topRight.style.backgroundColor = "tomato";
 }
 
 function three() {
@@ -129,8 +106,123 @@ function four() {
 }
 
 function clearColor() {
-	topLeft.style.backgroundColor = "darkcolor";
-	bottomLeft.style.backgroundColor = "goldenred";
-	rightLeft.style.backgroundColor = "darkred";
+	topLeft.style.backgroundColor = "darkgreen";
+	bottomLeft.style.backgroundColor = "goldenrod";
+	topRight.style.backgroundColor = "darkred";
 	bottomRight.style.backgroundColor = "darkblue";
 }
+
+function check() {
+	if (playerOrder[playerOrder.length - 1] !== order[playerOrder.length - 1]) {
+		good = false;
+	}
+	// 20 is num of games
+	if (playerOrder.length === 20 && good) {
+		winGame();
+	}
+
+	if (!good) {
+		flashColor();
+		turnCounter.innerHTML = "NO!";
+		setTimeout(() => {
+			turnCounter.innerHTML = turn;
+			clearColor();
+
+			if (strict) {
+				play();
+			} else {
+				compTurn = true;
+				flash = 0;
+				playerOrder = [];
+				good = true;
+				intervalID = setInterval(gameTurn, 800);
+			}
+		}, 800);
+
+		noise = false;
+	}
+
+	if (turn === playerOrder.length && good && !win) {
+		turn += 1;
+		playerOrder = [];
+		compTurn = true;
+		flash = 0;
+		turnCounter.innerHTML = turn;
+		intervalID = setInterval(gameTurn, 800);
+	}
+}
+
+// ---- addEventListeners
+strictButton.addEventListener("click", () => {
+	strict = strictButton.checked ? true : false;
+});
+
+onButton.addEventListener("click", () => {
+	if (onButton.checked) {
+		on = true;
+		turnCounter.innerHTML = "-";
+	} else {
+		on = false;
+		turnCounter.innerHTML = "";
+		clearColor();
+		clearInterval(intervalID);
+	}
+});
+
+startButton.addEventListener("click", () => {
+	if (on || win) {
+		play();
+	}
+});
+
+topLeft.addEventListener("click", () => {
+	if (on) {
+		playerOrder.push(1);
+	}
+	check();
+	one();
+	if(!win) {
+		setTimeout(() => {
+			clearColor();
+		}, 300);
+	}
+});
+
+topRight.addEventListener("click", () => {
+	if (on) {
+		playerOrder.push(2);
+	}
+	check();
+	two();
+	if(!win) {
+		setTimeout(() => {
+			clearColor();
+		}, 300);
+	}
+});
+
+bottomLeft.addEventListener("click", () => {
+	if (on) {
+		playerOrder.push(3);
+	}
+	check();
+	three();
+	if(!win) {
+		setTimeout(() => {
+			clearColor();
+		}, 300);
+	}
+});
+
+bottomRight.addEventListener("click", () => {
+	if (on) {
+		playerOrder.push(4);
+	}
+	check();
+	four();
+	if(!win) {
+		setTimeout(() => {
+			clearColor();
+		}, 300);
+	}
+});
