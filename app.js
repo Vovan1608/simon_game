@@ -105,7 +105,7 @@ function two() {
 	}
 
 	noise = true;
-	topLeft.style.backgroundColor = "tomato";
+	rightLeft.style.backgroundColor = "tomato";
 }
 
 function three() {
@@ -115,7 +115,7 @@ function three() {
 	}
 
 	noise = true;
-	topLeft.style.backgroundColor = "yellow";
+	bottomLeft.style.backgroundColor = "yellow";
 }
 
 function four() {
@@ -125,5 +125,12 @@ function four() {
 	}
 
 	noise = true;
-	topLeft.style.backgroundColor = "lightskyblue";
+	bottomRight.style.backgroundColor = "lightskyblue";
+}
+
+function clearColor() {
+	topLeft.style.backgroundColor = "darkcolor";
+	bottomLeft.style.backgroundColor = "goldenred";
+	rightLeft.style.backgroundColor = "darkred";
+	bottomRight.style.backgroundColor = "darkblue";
 }
